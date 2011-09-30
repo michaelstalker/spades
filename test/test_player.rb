@@ -26,5 +26,18 @@ class TestPlayer < Test::Unit::TestCase
       @player.sort_hand
       assert_equal(@player.hand, [@three_clubs, @nine_diamonds, @ace_hearts, @king_spades])
     end
+    
+    should 'play highest priority card' do
+      @player.take_cards(@cards)
+      @player.sort_hand
+      card = @player.play_card
+      assert_equal(card, @three_clubs)
+    end
+    
+    should 'only one less card after playing a card' do
+      @player.take_cards(@cards)
+      @player.play_card
+      assert_equal(@player.hand.count, 3)
+    end
   end
 end
