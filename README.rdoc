@@ -1,3 +1,5 @@
 = Welcome to the Spades Simulator
 
-This is not optimized for speed yet.
+The program isn't done yet.
+
+Also, this is not yet optimized for speed.
