@@ -15,6 +15,12 @@ class TestCard < Test::Unit::TestCase
       card = Spades::Card.new('ace_spades')
       assert_equal(card.value, 52)
     end
+    
+    should 'raise exception when caller passed in invalid card name' do
+      assert_raise ArgumentError do
+        card = Spades::Card.new('park_place')
+      end
+    end
   end
   
   context 'determining card value' do

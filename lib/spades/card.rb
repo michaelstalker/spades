@@ -25,7 +25,7 @@ module Spades
     
     def initialize(name)
       @name = name
-      @value = VALUES[name]
+      @value = VALUES[name] || raise(ArgumentError, 'Invalid card name')
     end
     
     def <(card)
