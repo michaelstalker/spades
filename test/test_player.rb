@@ -5,8 +5,12 @@ require_relative '../lib/spades/player'
 require_relative '../lib/spades/card'
 
 class TestPlayer < Test::Unit::TestCase
+  should 'have an empty hand when player gets initialized' do
+    player = Spades::Player.new
+    assert_equal(player.hand, [])
+  end
+  
   context 'playing a hand' do
-    
     setup do
       @ace_hearts = Spades::Card.new('ace_hearts')
       @three_clubs = Spades::Card.new('3_clubs')

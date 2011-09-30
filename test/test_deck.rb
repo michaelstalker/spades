@@ -30,4 +30,11 @@ class TestDeck < Test::Unit::TestCase
     
     assert successful_shuffle
   end
+  
+  should 'give away 13 cards' do
+    deck = Spades::Deck.new
+    quarter_deck = deck.give_quarter_deck
+    assert_equal(quarter_deck.length, 13)
+    assert_equal(deck.cards.length, 39)
+  end
 end

@@ -12,6 +12,10 @@ module Spades
       @cards.shuffle!
     end
     
+    def give_quarter_deck
+      @cards.slice!(0..12)
+    end
+    
     private
     
     def populate_deck

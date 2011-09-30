@@ -11,5 +11,14 @@ module Spades
     def initialize
       @deck = Spades::Deck.new
     end
+    
+    def deal(player)
+      quarter_deck = @deck.give_quarter_deck
+      player.take_cards(quarter_deck)
+    end
+    
+    def rebuild_deck
+      @deck = Spades::Deck.new
+    end
   end
 end

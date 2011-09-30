@@ -1,2 +1,3 @@
 = Welcome to the Spades Simulator
 
+This is not optimized for speed yet.

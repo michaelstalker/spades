@@ -61,7 +61,7 @@ module Spades
       self.value > card.value
     end
     
-    # Note: We're comparing play priorities!
+    # Note: We're comparing play priorities
     def <=>(card)
       return -1 if self.play_priority < card.play_priority
       return 0 if self.play_priority == card.play_priority

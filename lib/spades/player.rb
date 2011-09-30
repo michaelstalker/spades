@@ -2,6 +2,10 @@ module Spades
   class Player
     attr_reader :hand
     
+    def initialize
+      @hand = []
+    end
+    
     def take_cards(cards)
       @hand = cards
     end
