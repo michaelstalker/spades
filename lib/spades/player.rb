@@ -13,5 +13,9 @@ module Spades
     def play_card
       @hand.delete_at(0)
     end
+    
+    def return_cards
+      @hand.clear
+    end
   end
 end
