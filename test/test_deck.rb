@@ -13,28 +13,21 @@ CARDS = ['2_spades', '3_spades', '4_spades', '5_spades', '6_spades', '7_spades',
          '10_diamonds', 'jack_diamonds', 'queen_diamonds', 'king_diamonds', 'ace_diamonds']
 
 class TestDeck < Test::Unit::TestCase
-  context 'initialize deck' do
-    setup do
-      @deck = Spades::Deck.new
-    end
-    
-    should 'have 52 cards in deck' do
-      assert_equal(@deck.cards.count, 52)
-    end
+  should 'have 52 cards in deck' do
+    deck = Spades::Deck.new
+    assert_equal(deck.cards.count, 52)
   end
-  
-  context 'deck actions' do
-    should 'shuffle cards' do
-      deck = Spades::Deck.new
-      successful_shuffle = false
-      
-      old_order = Marshal.load(Marshal.dump(deck.cards))
-      deck.shuffle
-      new_order = deck.cards
-      
-      (0..51).each { |n| successful_shuffle = true if old_order[n] != new_order[n] }
-      
-      assert successful_shuffle
-    end
+
+  should 'shuffle cards' do
+    deck = Spades::Deck.new
+    successful_shuffle = false
+    
+    old_order = Marshal.load(Marshal.dump(deck.cards))
+    deck.shuffle
+    new_order = deck.cards
+    
+    (0..51).each { |n| successful_shuffle = true if old_order[n] != new_order[n] }
+    
+    assert successful_shuffle
   end
 end
