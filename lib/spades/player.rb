@@ -1,5 +1,8 @@
+require 'observer'
+
 module Spades
   class Player
+    include Observable
     attr_reader :hand
     
     def initialize
@@ -11,11 +14,14 @@ module Spades
     end
     
     def sort_hand
-      @hand.sort! { |card_a, card_b| card_b <=> card_a }
+      @hand.sort! { |card_1, card_2| card_2.compare_play_priority(card_1) }
     end
     
     def play_card
-      @hand.delete_at(0)
+      card = @hand.delete_at(0)
+      changed
+      notify_observers(card)
+      card
     end
     
     def return_cards

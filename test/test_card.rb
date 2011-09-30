@@ -11,9 +11,9 @@ class TestCard < Test::Unit::TestCase
       assert_equal(card.name, '4_spades')
     end
     
-    should 'assign card value when card is initialized' do
+    should 'assign card ranking when card is initialized' do
       card = Spades::Card.new('ace_spades')
-      assert_equal(card.value, 52)
+      assert_equal(card.ranking, 52)
     end
     
     should 'assign play priority when card is initialized' do
@@ -28,7 +28,7 @@ class TestCard < Test::Unit::TestCase
     end
   end
   
-  context 'determining card value' do
+  context 'determining card ranking' do
     setup do
       @ace_spades = Spades::Card.new('ace_spades')
       @two_spades = Spades::Card.new('2_spades')
@@ -43,6 +43,10 @@ class TestCard < Test::Unit::TestCase
 
     should 'respond to >' do
       assert_respond_to(@ace_spades, :>)
+    end
+    
+    should 'respond to <=>' do
+      assert_respond_to(@ace_spades, :'<=>')
     end
     
     should 'indicate one card is greater than another in same suit' do
@@ -86,25 +90,21 @@ class TestCard < Test::Unit::TestCase
       @seven_hearts = Spades::Card.new('7_hearts')
       @three_clubs = Spades::Card.new('3_clubs')
     end
-    
-    should 'respond to <=>' do
-      assert_respond_to(@ace_spades, :'<=>')
-    end
-    
+        
     should 'indicate that diamond is lower priority than club' do
-      assert_equal((@ten_diamonds <=> @three_clubs), -1)
+      assert_equal(@ten_diamonds.compare_play_priority(@three_clubs), -1)
     end
     
     should 'indicate that club is higher priority than diamond' do
-      assert_equal((@three_clubs <=> @ten_diamonds), 1)
+      assert_equal(@three_clubs.compare_play_priority(@ten_diamonds), 1)
     end
     
     should 'indicate that heart is lower priority than diamond' do
-      assert_equal((@seven_hearts <=> @ten_diamonds), -1)
+      assert_equal(@seven_hearts.compare_play_priority(@ten_diamonds), -1)
     end
     
     should 'indicate that spade is lower priority than heart' do
-      assert_equal((@ace_spades <=> @seven_hearts), -1)
+      assert_equal(@ace_spades.compare_play_priority(@seven_hearts), -1)
     end
   end  
 end

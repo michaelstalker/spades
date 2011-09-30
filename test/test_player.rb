@@ -38,7 +38,7 @@ class TestPlayer < Test::Unit::TestCase
       assert_equal(card, @three_clubs)
     end
     
-    should 'only one less card after playing a card' do
+    should 'have one less card after playing a card' do
       @player.take_cards(@cards)
       @player.play_card
       assert_equal(@player.hand.count, 3)

@@ -1,4 +1,4 @@
-#! /usr/local/rubybook/bin/ruby
+#! /usr/bin/ruby
 require 'spades/runner'
 
 runner = Spades::Runner.new(ARGV)
