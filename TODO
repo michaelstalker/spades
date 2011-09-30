@@ -1,0 +1,15 @@
+Add scorekeeper
+Add judge or rulekeeper
+	This is where you should add values to each card
+	Also add <=> method for cards here?
+
+Add players
+Make one player the dealer
+	Should the dealer shuffle or the deck? Probably the dealer. Add a shuffle method to the Dealer class.
+		class Dealer
+			def shuffle(deck)
+				# Delegate the shuffling task to deck. Dealer doesn't need to know
+				# the cards are an array.
+				deck.shuffle
+			end
+		end
