@@ -24,6 +24,6 @@ class TestDealer < Test::Unit::TestCase
       (0..51).each { |n| successful_shuffle = true if old_order[n] != new_order[n] }
     
       assert successful_shuffle
-    end
+    end    
   end
 end
