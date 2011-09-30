@@ -32,6 +32,14 @@ class TestCard < Test::Unit::TestCase
       @three_clubs = Spades::Card.new('3_clubs')
     end
     
+    should 'respond to <' do
+      assert_respond_to(@ace_spades, :<)
+    end
+
+    should 'respond to >' do
+      assert_respond_to(@ace_spades, :>)
+    end
+    
     should 'indicate one card is greater than another in same suit' do
       assert(@ace_spades > @two_spades)
     end
