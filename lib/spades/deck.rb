@@ -12,7 +12,7 @@ module Spades
       @cards.shuffle!
     end
     
-    def give_quarter_deck
+    def next_13_cards
       @cards.slice!(0..12)
     end
     

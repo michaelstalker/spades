@@ -25,9 +25,10 @@ module Spades
           dealer.deal(player)
           player.sort_hand
           player.play_card
-          
-          # have players return the rest of their cards
+          player.hand.clear
         end
+        
+        dealer.rebuild_deck
         
         # have dealer pick up the cards and reshuffle the deck
         current_test_count += 1

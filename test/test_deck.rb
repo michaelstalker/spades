@@ -33,7 +33,7 @@ class TestDeck < Test::Unit::TestCase
   
   should 'give away 13 cards' do
     deck = Spades::Deck.new
-    quarter_deck = deck.give_quarter_deck
+    quarter_deck = deck.next_13_cards
     assert_equal(quarter_deck.length, 13)
     assert_equal(deck.cards.length, 39)
   end

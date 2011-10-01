@@ -13,7 +13,7 @@ module Spades
     end
     
     def deal(player)
-      quarter_deck = @deck.give_quarter_deck
+      quarter_deck = @deck.next_13_cards
       player.take_cards(quarter_deck)
     end
     

@@ -21,7 +21,11 @@ module Spades
     
     def add_to_queue(card)
       @queue << card
-      increment_win_count(winner) if queue_count == 4
+      
+      if queue_count == 4
+        increment_win_count(winner)
+        @queue.clear
+      end
     end
     
     def queue_count
