@@ -24,16 +24,9 @@ class TestPlayer < Test::Unit::TestCase
       @player.take_cards(@cards)
       assert @player.hand
     end
-  
-    should 'sort hand' do
-      @player.take_cards(@cards)
-      @player.sort_hand
-      assert_equal(@player.hand, [@three_clubs, @nine_diamonds, @ace_hearts, @king_spades])
-    end
-    
+      
     should 'play highest priority card' do
       @player.take_cards(@cards)
-      @player.sort_hand
       card = @player.play_card
       assert_equal(card, @three_clubs)
     end

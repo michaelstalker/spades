@@ -81,30 +81,4 @@ class TestCard < Test::Unit::TestCase
       assert(@ten_diamonds < @two_spades)
     end
   end
-  
-  context 'determining play priority' do
-    setup do
-      @ace_spades = Spades::Card.new('ace_spades')
-      @two_spades = Spades::Card.new('2_spades')
-      @ten_diamonds = Spades::Card.new('10_diamonds')
-      @seven_hearts = Spades::Card.new('7_hearts')
-      @three_clubs = Spades::Card.new('3_clubs')
-    end
-        
-    should 'indicate that diamond is lower priority than club' do
-      assert_equal(@ten_diamonds.compare_play_priority(@three_clubs), -1)
-    end
-    
-    should 'indicate that club is higher priority than diamond' do
-      assert_equal(@three_clubs.compare_play_priority(@ten_diamonds), 1)
-    end
-    
-    should 'indicate that heart is lower priority than diamond' do
-      assert_equal(@seven_hearts.compare_play_priority(@ten_diamonds), -1)
-    end
-    
-    should 'indicate that spade is lower priority than heart' do
-      assert_equal(@ace_spades.compare_play_priority(@seven_hearts), -1)
-    end
-  end  
 end

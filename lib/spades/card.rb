@@ -65,11 +65,5 @@ module Spades
       return 1 if self.ranking > card.ranking
       return 0 if self.ranking == card.ranking
     end
-    
-    def compare_play_priority(card)
-      return -1 if self.play_priority < card.play_priority
-      return 1 if self.play_priority > card.play_priority
-      return 0 if self.play_priority == card.play_priority
-    end
   end
 end
