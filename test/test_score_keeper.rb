@@ -8,10 +8,10 @@ class TestScoreKeeper < Test::Unit::TestCase
   context 'judging which card won the trick' do
     setup do
       @score_keeper = Spades::ScoreKeeper.new
-      @two_clubs = Spades::Card.new('2_clubs')
-      @seven_clubs = Spades::Card.new('7_clubs')
-      @jack_clubs = Spades::Card.new('jack_clubs')
-      @three_diamonds = Spades::Card.new('3_diamonds')
+      @two_clubs = Spades::Card.new(:'2_clubs')
+      @seven_clubs = Spades::Card.new(:'7_clubs')
+      @jack_clubs = Spades::Card.new(:jack_clubs)
+      @three_diamonds = Spades::Card.new(:'3_diamonds')
     end
     
     should 'decide which card wins the trick' do

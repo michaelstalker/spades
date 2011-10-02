@@ -6,35 +6,35 @@ require_relative '../lib/spades/card'
 class TestCard < Test::Unit::TestCase
   context 'initializing cards' do
     should 'assign name when card is initialized' do
-      card = Spades::Card.new('4_spades')
+      card = Spades::Card.new(:'4_spades')
       assert_not_nil card.name
-      assert_equal(card.name, '4_spades')
+      assert_equal(card.name, :'4_spades')
     end
     
     should 'assign card ranking when card is initialized' do
-      card = Spades::Card.new('ace_spades')
+      card = Spades::Card.new(:'ace_spades')
       assert_equal(card.ranking, 52)
     end
     
     should 'assign play priority when card is initialized' do
-      card = Spades::Card.new('2_hearts')
+      card = Spades::Card.new(:'2_hearts')
       assert_equal(card.play_priority, 14)
     end
     
     should 'raise exception when caller passed in invalid card name' do
       assert_raise ArgumentError do
-        card = Spades::Card.new('park_place')
+        card = Spades::Card.new(:'park_place')
       end
     end
   end
   
   context 'determining card ranking' do
     setup do
-      @ace_spades = Spades::Card.new('ace_spades')
-      @two_spades = Spades::Card.new('2_spades')
-      @ten_diamonds = Spades::Card.new('10_diamonds')
-      @seven_hearts = Spades::Card.new('7_hearts')
-      @three_clubs = Spades::Card.new('3_clubs')
+      @ace_spades = Spades::Card.new(:'ace_spades')
+      @two_spades = Spades::Card.new(:'2_spades')
+      @ten_diamonds = Spades::Card.new(:'10_diamonds')
+      @seven_hearts = Spades::Card.new(:'7_hearts')
+      @three_clubs = Spades::Card.new(:'3_clubs')
     end
     
     should 'respond to <' do

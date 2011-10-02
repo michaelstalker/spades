@@ -12,10 +12,10 @@ class TestPlayer < Test::Unit::TestCase
   
   context 'playing a hand' do
     setup do
-      @ace_hearts = Spades::Card.new('ace_hearts')
-      @three_clubs = Spades::Card.new('3_clubs')
-      @nine_diamonds = Spades::Card.new('9_diamonds')
-      @king_spades = Spades::Card.new('king_spades')
+      @ace_hearts = Spades::Card.new(:ace_hearts)
+      @three_clubs = Spades::Card.new(:'3_clubs')
+      @nine_diamonds = Spades::Card.new(:'9_diamonds')
+      @king_spades = Spades::Card.new(:king_spades)
       @cards = [@ace_hearts, @three_clubs, @king_spades, @nine_diamonds]
       @player = Spades::Player.new
     end
