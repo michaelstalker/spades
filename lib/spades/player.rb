@@ -13,12 +13,9 @@ module Spades
       @hand = cards
     end
     
-    def sort_hand
-      @hand.sort! { |card_1, card_2| card_2.compare_play_priority(card_1) }
-    end
-    
     def play_card
-      card = @hand.delete_at(0)
+      card_index = choose_card_index
+      card = @hand.delete_at(card_index)
       changed
       notify_observers(card)
       card
@@ -26,6 +23,21 @@ module Spades
     
     def return_cards
       @hand.clear
+    end
+    
+    private
+    
+    def choose_card_index
+      card_to_play = @hand.first
+      card_to_play_index = 0
+      @hand.each_index do |current_card_index|
+        current_card = @hand[current_card_index]
+        if current_card.play_priority > card_to_play.play_priority
+          card_to_play = current_card
+          card_to_play_index = current_card_index
+        end
+      end
+      card_to_play_index
     end
   end
 end
