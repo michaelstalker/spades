@@ -36,49 +36,41 @@ class TestCard < Test::Unit::TestCase
       @seven_hearts = Spades::Card.new(:'7_hearts')
       @three_clubs = Spades::Card.new(:'3_clubs')
     end
-    
-    should 'respond to <' do
-      assert_respond_to(@ace_spades, :<)
-    end
-
-    should 'respond to >' do
-      assert_respond_to(@ace_spades, :>)
-    end
-    
+        
     should 'respond to <=>' do
       assert_respond_to(@ace_spades, :'<=>')
     end
     
     should 'indicate one card is greater than another in same suit' do
-      assert(@ace_spades > @two_spades)
+      assert_equal(@ace_spades <=> @two_spades, 1)
     end
     
     should 'indicate one card is less than another' do
-      assert(@two_spades < @ace_spades)
+      assert_equal(@two_spades <=> @ace_spades, -1)
     end
     
     should 'inidcate spade is greater than heart' do
-      assert(@two_spades > @seven_hearts)
+      assert_equal(@two_spades <=> @seven_hearts, 1)
     end
     
     should 'inidcate spade is greater than diamond' do
-      assert(@two_spades > @ten_diamonds)
+      assert_equal(@two_spades <=> @ten_diamonds, 1)
     end
     
     should 'indicate spade is greater than club' do
-      assert(@two_spades > @three_clubs)
+      assert_equal(@two_spades <=> @three_clubs, 1)
     end
     
     should 'indicate diamond is less than heart' do
-      assert(@ten_diamonds < @seven_hearts)
+      assert_equal(@ten_diamonds <=> @seven_hearts, -1)
     end
     
     should 'indicate diamond is less than club' do
-      assert(@ten_diamonds < @three_clubs)
+      assert_equal(@ten_diamonds <=> @three_clubs, -1)
     end
     
     should 'indicate diamond is less than spade' do
-      assert(@ten_diamonds < @two_spades)
+      assert_equal(@ten_diamonds <=> @two_spades, -1)
     end
   end
 end

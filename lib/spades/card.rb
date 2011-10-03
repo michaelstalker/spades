@@ -2,7 +2,7 @@ module Spades
   class Card
     attr_reader :name, :ranking, :play_priority
     
-    # Used to determine what card wins the trick
+    # Used to determine what card wins the trick. Higher rankings beat lower rankings.
     RANKINGS = { :'2_diamonds' => 1, :'3_diamonds' => 2, :'4_diamonds' => 3, :'5_diamonds' => 4,
                  :'6_diamonds' => 5, :'7_diamonds' => 6, :'8_diamonds' => 7, :'9_diamonds' => 8,
                  :'10_diamonds' => 9, :jack_diamonds => 10, :queen_diamonds => 11,
@@ -24,7 +24,7 @@ module Spades
                  :king_spades => 51, :ace_spades => 52
     }
     
-    # Used to determine which card a player plays
+    # Used to determine which card a player plays. Higher priority cards get played first.
     PLAY_PRIORITY = { :'2_spades' => 1, :'3_spades' => 2, :'4_spades' => 3, :'5_spades' => 4,
                       :'6_spades' => 5, :'7_spades' => 6, :'8_spades' => 7, :'9_spades' => 8,
                       :'10_spades' => 9, :jack_spades => 10, :queen_spades => 11,
@@ -51,15 +51,7 @@ module Spades
       @ranking = RANKINGS[name] || raise(ArgumentError, 'Invalid card name')
       @play_priority = PLAY_PRIORITY[name]
     end
-    
-    def <(card)
-      self.ranking < card.ranking
-    end
-    
-    def >(card)
-      self.ranking > card.ranking
-    end
-    
+        
     def <=>(card)
       return -1 if self.ranking < card.ranking
       return 1 if self.ranking > card.ranking
