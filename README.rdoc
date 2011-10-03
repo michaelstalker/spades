@@ -1,5 +1,24 @@
 = Welcome to the Spades Simulator
 
-The program isn't done yet.
+== Installation
+1. git clone git://github.com/mstalker/spades.git
+2. cd spades
+3. ruby -I lib bin/spades 1000000
 
-Also, this is not yet optimized for speed.
+The number on the command line determines how many hands get played. You can specify any positive integer. I used 1,000,000 above to improve the accuracy of the program. It takes a bit long to run, so you may want to use a smaller number.
+
+== Approximate probability that each card will win the first hand
+2 of Clubs: 0.0000%
+3 of Clubs: 0.0048%
+4 of Clubs: 1.2461%
+5 of Clubs: 11.7992%
+6 of Clubs: 16.7586%
+7 of Clubs: 14.6417%
+8 of Clubs: 16.9855%
+9 of Clubs: 11.8528%
+10 of Clubs: 9.0954%
+Jack of Clubs: 6.7683%
+Queen of Clubs: 4.9003%
+King of Clubs: 3.5096%
+Ace of Clubs: 2.4377%
+Spades: 0.0000%

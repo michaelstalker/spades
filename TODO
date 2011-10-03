@@ -1,8 +1,4 @@
-Calculate probabilities
-Format probability results
 Make program more robust
-Optimize for speed
-Write up my thought process for approaching this problem
 Make sure no cards get dealt or played twice?
 Don't rebuild the deck every time you play a round
 Don't remove a card when a player plays?
