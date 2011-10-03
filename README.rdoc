@@ -1,9 +1,9 @@
 = Welcome to the Spades Simulator
 
 == Installation
-1. git clone git://github.com/mstalker/spades.git
-2. cd spades
-3. ruby -I lib bin/spades 1000000
+1. `git clone git://github.com/mstalker/spades.git`
+2. `cd spades`
+3. `ruby -I lib bin/spades 1000000`
 
 The number on the command line determines how many hands get played. You can specify any positive integer. I used 1,000,000 above to improve the accuracy of the program. It takes a bit long to run, so you may want to use a smaller number.
 
