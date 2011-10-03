@@ -21,7 +21,7 @@ module Spades
       card
     end
     
-    def return_cards
+    def clear_hand
       @hand.clear
     end
     

@@ -14,6 +14,10 @@ class TestScoreKeeper < Test::Unit::TestCase
       @three_diamonds = Spades::Card.new(:'3_diamonds')
     end
     
+    should 'initialize with hands player equal to 0' do
+      assert_equal(@score_keeper.hands_played, 0)
+    end
+    
     should 'decide which card wins the trick' do
       cards = [@two_clubs, @seven_clubs, @jack_clubs, @three_diamonds]
       cards.each { |card| @score_keeper.add_to_queue(card) }
@@ -48,6 +52,71 @@ class TestScoreKeeper < Test::Unit::TestCase
       end
 
       assert_equal(@score_keeper.queue_count, 0)
+    end
+    
+    should 'tally up the total number of wins for the spades' do
+      four_spades = Spades::Card.new(:'4_spades')
+      cards = [@two_clubs, @seven_clubs, @jack_clubs, four_spades]
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+
+      five_spades = Spades::Card.new(:'5_spades')
+      cards = [@two_clubs, @seven_clubs, @jack_clubs, five_spades]
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+
+      assert_equal(@score_keeper.spades_win_count, 2)
+    end
+    
+    should 'keep track of number of hands played' do
+      cards = [@two_clubs, @seven_clubs, @jack_clubs, @three_diamonds]
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+      
+      four_spades = Spades::Card.new(:'4_spades')
+      cards = [@two_clubs, @seven_clubs, @jack_clubs, four_spades]
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+
+      five_spades = Spades::Card.new(:'5_spades')
+      cards = [@two_clubs, @seven_clubs, @jack_clubs, five_spades]
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+      
+      assert_equal(@score_keeper.hands_played, 3)
+    end
+    
+    should 'calculate the percentage of times a card won' do
+      cards = [@two_clubs, @seven_clubs, @jack_clubs, @three_diamonds]
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+      
+      four_spades = Spades::Card.new(:'4_spades')
+      cards = [@two_clubs, @seven_clubs, @jack_clubs, four_spades]
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+
+      five_spades = Spades::Card.new(:'5_spades')
+      cards = [@two_clubs, @seven_clubs, @jack_clubs, five_spades]
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+
+      assert_equal(@score_keeper.percent_won(@two_clubs), 0.0)
+      assert_equal(@score_keeper.percent_won(@seven_clubs), 0.0)      
+      assert_equal(@score_keeper.percent_won(@jack_clubs), 60.0)
+      assert_equal(@score_keeper.percent_won(four_spades), 20.0)
+      assert_equal(@score_keeper.percent_won(five_spades), 20.0)
+    end
+    
+    should 'calculate the percentage of times a spade won' do
+      cards = [@two_clubs, @seven_clubs, @jack_clubs, @three_diamonds]
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+      
+      four_spades = Spades::Card.new(:'4_spades')
+      cards = [@two_clubs, @seven_clubs, @jack_clubs, four_spades]
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+
+      five_spades = Spades::Card.new(:'5_spades')
+      cards = [@two_clubs, @seven_clubs, @jack_clubs, five_spades]
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+      
+      assert_equal(@score_keeper.spades_percent_won, 40.0)
     end
   end
 end

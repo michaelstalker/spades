@@ -39,7 +39,7 @@ class TestPlayer < Test::Unit::TestCase
     
     should 'not have any cards in hand after returning cards' do
       @player.take_cards(@cards)
-      @player.return_cards
+      @player.clear_hand
       assert_equal(@player.hand.count, 0)
     end
   end

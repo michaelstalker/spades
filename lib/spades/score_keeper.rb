@@ -3,7 +3,7 @@ require_relative 'card'
 module Spades
   class ScoreKeeper
     
-    attr_reader :wins
+    attr_reader :hands_played
     
     def initialize
       @queue = []
@@ -17,12 +17,14 @@ module Spades
                 :'10_spades' => 0, :jack_spades => 0, :queen_spades => 0,
                 :king_spades => 0, :ace_spades => 0
       }
+      @hands_played = 0
     end
     
     def add_to_queue(card)
       @queue << card
       
       if queue_count == 4
+        @hands_played += 1
         increment_win_count(winner)
         @queue.clear
       end
@@ -38,6 +40,23 @@ module Spades
     
     def update(card)
       add_to_queue(card)
+    end
+    
+    def spades_win_count
+      spades = [:'2_spades', :'3_spades', :'4_spades', :'5_spades', :'6_spades', :'7_spades',
+       :'8_spades', :'9_spades', :'10_spades', :jack_spades, :queen_spades, :king_spades,
+       :ace_spades]
+      spades_win_count = 0
+      spades.each { |spade| spades_win_count += @wins[spade] }
+      spades_win_count
+    end
+    
+    def percent_won(card)
+      (win_count(card) / @hands_played.to_f) * 100
+    end
+    
+    def spades_percent_won
+      (spades_win_count / @hands_played.to_f) * 100
     end
     
     private
