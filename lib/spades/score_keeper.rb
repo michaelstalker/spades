@@ -56,11 +56,13 @@ module Spades
     end
     
     def percent_won(card)
-      (win_count(card) / @hands_played.to_f) * 100
+      percent = (win_count(card) / @hands_played.to_f) * 100
+      percent.round(4)
     end
     
     def spades_percent_won
-      (spades_win_count / @hands_played.to_f) * 100
+      percent = (spades_win_count / @hands_played.to_f) * 100
+      percent.round(4)
     end
     
     private

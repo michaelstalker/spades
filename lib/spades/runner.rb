@@ -7,7 +7,6 @@ module Spades
   class Runner
     
     def initialize(argv)
-      
       @num_tests = argv.first.to_i
     end
     
