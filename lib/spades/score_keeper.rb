@@ -35,7 +35,11 @@ module Spades
     end
     
     def win_count(card)
-      @wins[card.name.to_sym]
+      if card.instance_of? Symbol
+        @wins[card]
+      else
+        @wins[card.name.to_sym]
+      end
     end
     
     def update(card)

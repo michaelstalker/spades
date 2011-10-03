@@ -23,6 +23,12 @@ class TestScoreKeeper < Test::Unit::TestCase
       cards.each { |card| @score_keeper.add_to_queue(card) }
       assert_equal(@score_keeper.win_count(@jack_clubs), 1)
     end
+
+    should 'tally win count for symbolized card name' do
+      cards = [@two_clubs, @seven_clubs, @jack_clubs, @three_diamonds]
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+      assert_equal(@score_keeper.win_count(:jack_clubs), 1)
+    end
     
     should 'add a card to the queue when a player plays a card' do
       player = Spades::Player.new
@@ -100,6 +106,17 @@ class TestScoreKeeper < Test::Unit::TestCase
       assert_equal(@score_keeper.percent_won(@jack_clubs), 60.0)
       assert_equal(@score_keeper.percent_won(four_spades), 20.0)
       assert_equal(@score_keeper.percent_won(five_spades), 20.0)
+    end
+    
+    should 'calculate the percentage of times a symbolized card name won' do
+      cards = [@two_clubs, @seven_clubs, @jack_clubs, @three_diamonds]
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+      cards.each { |card| @score_keeper.add_to_queue(card) }
+      
+      assert_equal(@score_keeper.percent_won(:'2_clubs'), 0.0)
+      assert_equal(@score_keeper.percent_won(:'7_clubs'), 0.0)      
+      assert_equal(@score_keeper.percent_won(:jack_clubs), 100.0)
     end
     
     should 'calculate the percentage of times a spade won' do

@@ -7,7 +7,7 @@ module Spades
   class Runner
     
     def initialize(argv)
-      # Add error handlding here
+      
       @num_tests = argv.first.to_i
     end
     
@@ -15,29 +15,18 @@ module Spades
       dealer = Spades::Dealer.new
       score_keeper = Spades::ScoreKeeper.new
       players = round_up_players
-      current_test_count = 0
+      rounds_played = 0
       
       players.each { |player| player.add_observer(score_keeper) }
       
-      puts Benchmark.measure {
-      while current_test_count < @num_tests
-        dealer.shuffle
-
-        players.each do |player|
-          dealer.deal(player)
-          player.play_card
-          player.hand.clear
-        end
-        
+      while rounds_played < @num_tests
+        play_hand(dealer, players)
         dealer.rebuild_deck
-        
-        # have dealer pick up the cards and reshuffle the deck
-        current_test_count += 1
+        rounds_played += 1
       end      
-      }  
-      #p score_keeper.wins
-      # Tally up the wins (combine wins for spades)
-      # Calculate probabilities
+
+      print_win_data(score_keeper)
+      
     end
     
     private
@@ -46,6 +35,34 @@ module Spades
       four_players = []
       4.times { four_players << Spades::Player.new }
       four_players
+    end
+    
+    def play_hand(dealer, players)
+      dealer.shuffle
+
+      players.each do |player|
+        dealer.deal(player)
+        player.play_card
+        player.clear_hand
+      end
+    end
+    
+    def print_win_data(score_keeper)
+      puts "Percentages of Wins\n---------------"
+      puts "2 of Clubs: #{score_keeper.percent_won(:'2_clubs')}"
+      puts "3 of Clubs: #{score_keeper.percent_won(:'3_clubs')}"
+      puts "4 of Clubs: #{score_keeper.percent_won(:'4_clubs')}"
+      puts "5 of Clubs: #{score_keeper.percent_won(:'5_clubs')}"
+      puts "6 of Clubs: #{score_keeper.percent_won(:'6_clubs')}"
+      puts "7 of Clubs: #{score_keeper.percent_won(:'7_clubs')}"
+      puts "8 of Clubs: #{score_keeper.percent_won(:'8_clubs')}"
+      puts "9 of Clubs: #{score_keeper.percent_won(:'9_clubs')}"
+      puts "10 of Clubs: #{score_keeper.percent_won(:'10_clubs')}"
+      puts "Jack of Clubs: #{score_keeper.percent_won(:jack_clubs)}"
+      puts "Queen of Clubs: #{score_keeper.percent_won(:queen_clubs)}"
+      puts "King of Clubs: #{score_keeper.percent_won(:king_clubs)}"
+      puts "Ace of Clubs: #{score_keeper.percent_won(:ace_clubs)}"
+      puts "Spades: #{score_keeper.spades_percent_won}"
     end
     
   end
